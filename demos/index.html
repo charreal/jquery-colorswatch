@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.js"></script>
+<link href="../jquery.nmk.colorswatch.css" rel="stylesheet" type="text/css" />
+<script src="../jquery.nmk.colorswatch.js"></script>
+<meta charset=utf-8 />
+<title>jQuery Colorswatch plugin demo</title>
+<script type="text/javascript">
+	$(function() {
+		$("#foreground, #background").colorswatch({
+			rowSize: 12
+		});
+	});
+</script>
+</head>
+<body>
+  <input id="foreground" />
+  <div style="position: absolute; right: 0" id="background"></div>
+</body>
+</html>
