@@ -66,9 +66,6 @@ $.widget('nmk.colorswatch', {
 					self.swatch.children().removeClass("nmk-colorswatch-selected");
 					target.addClass("nmk-colorswatch-selected");
 					self.value(target.data("colorswatch"));
-					if (self.isInput) {
-						self.hide();
-					}
 				}
 			});
 		
