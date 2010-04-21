@@ -10,14 +10,41 @@
 <title>jQuery Colorswatch plugin demo</title>
 <script type="text/javascript">
 	$(function() {
-		$("#foreground, #background").colorswatch({
-			rowSize: 12
+		$("#inline, #input").colorswatch({
+			rowSize: 36,
+			change: function(event, ui) {
+				$("<div></div>")
+					.text("Selected: " + ui.value)
+					.appendTo("#log");
+			}
+		});
+		$("#inline").resizable({
+			grid: [20, 20],
+			handles: "e",
+			resize: function() {
+				$(this).height("auto");
+			},
+			stop: function() {
+				$("#size").text("width: " + $(this).width() + "px;");
+			}
 		});
 	});
 </script>
+<style>
+	body { font-family: Verdana; font-size: 62.5%; }
+	h2 { margin-top: 0; }
+</style>
 </head>
 <body>
-  <input id="foreground" />
-  <div style="position: absolute; right: 0" id="background"></div>
+	<div class="ui-widget-content">
+		<h2 class="ui-widget-header">Inline Colorswatch (drag the right edge to resize)</h2>
+	  	<div id="inline"></div>
+		<div id="size"></div>
+	</div>
+	<div class="ui-widget-content">
+		<h2 class="ui-widget-header">Bound to input</h2>
+		<input id="input" />
+	</div>
+	<div id="log" class="ui-widget-content" style="width: 20em; height: 20em; overflow:auto"></div>
 </body>
 </html>

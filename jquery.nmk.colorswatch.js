@@ -50,6 +50,27 @@ $.widget('nmk.colorswatch', {
 	_create: function() {
 		this.swatch = (this.element.is(':input') ? this._initFromInput() : this.element)
 			.addClass('nmk-colorswatch');
+			
+		var self = this;
+		this.swatch
+			.addClass("ui-widget-content")
+			.mouseover(function(event) {
+				$(event.target).closest(".nmk-colorswatch-color").addClass("nmk-colorswatch-hover");
+			})
+			.mouseout(function(event) {
+				$(event.target).closest(".nmk-colorswatch-color").removeClass("nmk-colorswatch-hover");
+			})
+			.click(function(event) {
+				var target = $(event.target).closest(".nmk-colorswatch-color");
+				if (target.length) {
+					self.swatch.children().removeClass("nmk-colorswatch-selected");
+					target.addClass("nmk-colorswatch-selected");
+					self.value(target.data("colorswatch"));
+					if (self.isInput) {
+						self.hide();
+					}
+				}
+			});
 		
 		this._render();
 	},
@@ -72,6 +93,7 @@ $.widget('nmk.colorswatch', {
 		
 		return $('<div></div>')
 			.hide()
+			.addClass("nmk-colorswatch-popup")
 			.insertAfter(this.element);
 	},
 	
@@ -82,23 +104,17 @@ $.widget('nmk.colorswatch', {
 			self = this;
 
 		$.each(this.options.colors, function(i, color) {
-			if (!(i % rowSize)) {
-				row = $('<div></div>')
-					.addClass('nmk-colorswatch-row')
-					.appendTo(swatch);
-			}
-			
 			$('<div></div>')
+				// TODO highlight selected
 				.addClass('nmk-colorswatch-color')
 				.css('backgroundColor', color)
-				.click(function() {
-					self.value(color);
-					if (self.isInput) {
-						self.hide();
-					}
-				})
-				.appendTo(row);
+				.data('colorswatch', color)
+				.appendTo(swatch);
+				
 		});
+		$("<div></div>")
+			.addClass("ui-helper-clearfix")
+			.appendTo(swatch);
 	},
 	
 	show: function() {
@@ -128,6 +144,7 @@ $.widget('nmk.colorswatch', {
 		if (this.isInput) {
 			this.element.val(value);
 		}
+		this._trigger("change", null, { value: value });
 	},
 	
 	destroy: function() {

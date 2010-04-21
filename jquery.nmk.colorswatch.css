@@ -1,14 +1,16 @@
 .nmk-colorswatch {
-	border: 1px solid #000;
-	float: left;
-	position: absolute;
+	width: 240px;
 }
-.nmk-colorswatch-row {
-	clear: both;
+.nmk-colorswatch-popup {
+	position: absolute;
 }
 .nmk-colorswatch-color {
 	width: 16px;
 	height: 16px;
 	float: left;
 	margin: 2px;
+}
+.nmk-colorswatch-hover, .nmk-colorswatch-selected {
+	margin: 1px;
+	border: 1px solid black;
 }
